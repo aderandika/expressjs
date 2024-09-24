@@ -1,24 +1,22 @@
 import express from "express";
 const app = express();
 const port = 3000;
+// Route
+import router from "./routes/index.js";
+// Layouts
+import expressEjsLayouts from "express-ejs-layouts";
+// path 
+import path from "path";
+import url from "url";
+const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 
-app.get("/", (req, res) => {
-    res.send('Halo Randi');
-})
+app.set("views", path.join(__dirname, "views"));
+// Buat render view
+app.set("view engine", "ejs");
+// Definisikan layouts
+app.use(expressEjsLayouts);
 
-app.get("/about", (req, res) => {
-    res.send('About Page');
-})
-
-app.get("/contact", (req, res) => {
-    res.send('Contact');
-})
-
-// Menampilkan jika halaman tidak di temukan
-app.use("*", (req, res) => {
-    res.status(404);
-    res.send("Halaman tidak dapat ditemukan");
-})
+app.use(router);
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);

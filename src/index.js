@@ -15,6 +15,8 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 // Definisikan layouts
 app.use(expressEjsLayouts);
+// static file untuk inisialisasi root public
+app.use(express.static(path.join(__dirname, "../public")));
 
 app.use(router);
 

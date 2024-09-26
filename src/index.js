@@ -10,6 +10,11 @@ import path from "path";
 import url from "url";
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 
+// Body parser 
+import bodyParser from "body-parser";
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
 app.set("views", path.join(__dirname, "views"));
 // Buat render view
 app.set("view engine", "ejs");
